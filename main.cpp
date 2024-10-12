@@ -48,8 +48,10 @@ class TestCalculator {
         StringCalculator calculator;
 
         checkTest("Test 1: Empty string", calculator.add("") == 0);
-        
+
         checkTest("Test 2: Single number", calculator.add("1") == 1);
+
+        checkTest("Test 3: With ',' delimiter", calculator.add("2,4,6,1") == 14);
     }
 };
 
