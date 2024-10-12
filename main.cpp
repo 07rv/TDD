@@ -84,13 +84,13 @@ class TestCalculator {
         }
         checkTest("Test 6: Negative numbers", test7Passed);
 
-        bool test8Passed = false;
+        bool test7Passed = false;
         try {
             calculator.add("1,-2,-3");
         } catch (const exception& ex) {
-            test8Passed = string(ex.what()) == "negative numbers not allowed -2 -3 ";
+            test7Passed = string(ex.what()) == "negative numbers not allowed -2 -3 ";
         }
-        checkTest("Test 8: Multiple negative numbers", test8Passed);
+        checkTest("Test 8: Multiple negative numbers", test7Passed);
     }
 };
 
