@@ -1,9 +1,10 @@
-#include <iostream>
-#include <cassert>
-#include <vector>
 #include <string>
-#include <iostream>
+#include <vector>
 #include <sstream>
+#include <stdexcept>
+#include <algorithm>
+#include <iostream>
+
 using namespace std; 
 
 
@@ -17,6 +18,15 @@ class StringCalculator {
         string delimiter = ",";
         vector<int> negativeNumbers;
         int sum = 0;
+
+        if (numbers.substr(0, 2) == "//") {
+            size_t delimiterIndex = numbers.find("\n");
+            delimiter = numbers.substr(2, delimiterIndex - 2);
+            numbers = numbers.substr(delimiterIndex + 1);
+        }
+
+        replace(numbers.begin(), numbers.end(), '\n', delimiter[0]);
+
         stringstream ss(numbers);
         string token;
 
@@ -52,9 +62,12 @@ class TestCalculator {
         checkTest("Test 2: Single number", calculator.add("1") == 1);
 
         checkTest("Test 3: With ',' delimiter", calculator.add("2,4,6,1") == 14);
+
+        checkTest("Test 4: Newline and comma", calculator.add("1\n2,3") == 6);
+        
+        checkTest("Test 5: Support custom delimiter", calculator.add("//;\n1;2;3") == 6);
     }
 };
-
 
 int main(){
     try
