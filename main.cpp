@@ -40,6 +40,15 @@ class StringCalculator {
                 }
             }
         }
+
+        if (!negativeNumbers.empty()) {
+            string errorMessage = "negative numbers not allowed ";
+            for (int neg : negativeNumbers) {
+                errorMessage += to_string(neg) + " ";
+            }
+            throw runtime_error(errorMessage);
+        }
+
         return sum;
     }
 };
@@ -66,6 +75,8 @@ class TestCalculator {
         checkTest("Test 4: Newline and comma", calculator.add("1\n2,3") == 6);
         
         checkTest("Test 5: Support custom delimiter", calculator.add("//;\n1;2;3") == 6);
+
+        checkTest("Test 6: Negative numbers", calculator.add("1,-2,3"));
     }
 };
 
